@@ -58,6 +58,15 @@ var magnet = {
                 {'AD_UNIT_ID': addUnitId, 'BANNER_POSITION': position}
             ]
         );
+    },
+    MagnetRemoveBanner: function (successCallback, failureCallback) {
+        cordova.exec(
+            successCallback,
+            failureCallback,
+            'MagnetCordovaPlugin',
+            'removeBanner',
+            []
+        );
     }
 };
 module.exports = magnet;
