@@ -11,15 +11,19 @@
 	<author>Payam Hesami</author>
     <repo>https://github.com/MagnetAdServices/magnet-cordova-plugin</repo>
 	<issue>https://github.com/MagnetAdServices/magnet-cordova-plugin/issues</issue>
+	
+	<engines>
+        <engine name="cordova" version=">=3.0" />
+    </engines>
 
     <js-module src="www/magnet.js" name="magnet">
-        <clobbers target="magnet" />
+        <clobbers target="window.magnet" />
     </js-module>
 
 	<platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="admob" >
-                <param name="android-package" value="ir.magnet.facade.cordova.MagnetPlugin"/>
+            <feature name="MagnetCordovaPlugin" >
+                <param name="android-package" value="ir.magnet.facade.cordova.MagnetCordovaPlugin"/>
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
@@ -32,7 +36,7 @@
 			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
         </config-file>
         
-        <source-file src="src/android/libs/magnet-android-sdk-cordova.jar" target-dir="libs/"/>
+        <source-file src="src/android/libs/magnet-android-sdk-cordova-4.0.4.jar" target-dir="libs/"/>		
     </platform>
 
 </plugin>

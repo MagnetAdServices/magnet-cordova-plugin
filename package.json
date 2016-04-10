@@ -27,5 +27,11 @@
   "bugs": {
     "url": "https://github.com/MagnetAdServices/magnet-cordova-plugin/issues"
   },
-  "homepage": "https://github.com/MagnetAdServices/magnet-cordova-plugin#readme"
+  "homepage": "https://github.com/MagnetAdServices/magnet-cordova-plugin#readme",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0"
+    }
+  ]
 }
