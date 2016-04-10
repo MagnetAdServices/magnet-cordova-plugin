@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height />
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
+    <meta name="msapplication-tap-highlight" content="no" />
+    <title>Magnet cordova sample</title>
+    <style>
+        .bodyStyle{
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body >
+<div class="bodyStyle">
+    <h2>Magnet cordova sample</h2>
+    <lu>
+        <li><a href="javascript:loadInterstitial();">load Interstitial</a></li>
+        <br/>
+        <li><a href="javascript:showInterstitial();">show Interstitial</a></li>
+        <br/>
+        <li><a href="javascript:showBannerTop();">show banner top</a></li>
+        <br/>
+        <li><a href="javascript:showBannerBottom();">show banner bottom</a></li>
+        <br/>
+    </lu>
+
+</div>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+	function onDeviceReady(){
+		magnet.MagnetInitialize(function(){alert('init success');}, function(){alert('init fail');});
+		magnet.MagnetSetTestMode(true, null, null);
+	}
+	function loadInterstitial(){
+		document.addEventListener(magnet.Event.onInterstitialAdReceived, onInterstitialReceived, false);
+		magnet.MagnetLoadInterstitial('Your adunit id', null, function(){alert('load fail');});
+	}
+	function showInterstitial(){
+		magnet.MagnetShowInterstitial(null, null);
+	}
+	function showBannerTop(){
+		magnet.MagnetShowBanner('Your adunit id',magnet.Position.TOP, null, function(){alert('banner fail');});
+	}
+	function showBannerBottom(){
+		magnet.MagnetShowBanner('Your adunit id',magnet.Position.BOTTOM, null, function(){alert('banner fail');});
+	}
+	function onInterstitialReceived(){
+		console.log("Interstitial received");
+		alert('Interstitial is ready');
+	}
+	document.addEventListener('deviceready',onDeviceReady, false);
+</script>
+
+</body>
+</html>
