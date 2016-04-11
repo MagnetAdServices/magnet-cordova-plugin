@@ -7,13 +7,13 @@ Magnet plugin for Cordova and Phonegap.<br/>
 - Magnet android SDK 4.0.5<br/>
 - Cordova version >3.0<br/>
 
-### 1.install Magnet cordova plugin
+### 1.install magnet cordova plugin
 
 download the plugin ,then install with local location
 
     cordova plugin add c:\magnet_cordova_plugin 
 
-### 2.init admob phonegap plugin
+### 2.init magnet cordova plugin
 init plugin after deviceready event <br />
 
     magnet.MagnetInitialize(function(){alert('init success');}, function(){alert('init fail');});
