@@ -5,7 +5,7 @@
     id="magnet"
     version="1.0.0">
     <name>Magnet</name>
-    <description>Magnet plugin is a cordova and phonegap advertising pluging to mometise your apps using html5 and js</description>
+    <description>Magnet plugin is a cordova and phonegap advertising pluging to monetise your apps using html5 and js</description>
     <license>Apache 2.0</license>
     <keywords>magnet, ad, cordova, phonegap, html5, js</keywords>
 	<author>Payam Hesami</author>
@@ -23,20 +23,23 @@
 	<platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="MagnetCordovaPlugin" >
-                <param name="android-package" value="ir.magnet.facade.cordova.MagnetCordovaPlugin"/>
+                <param name="android-package" value="com.magnetadservices.facade.cordova.MagnetCordovaPlugin"/>
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<activity  android:name="ir.magnet.sdk.MagnetInterstitialActivity"  android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+			<activity  android:name="com.magnetadservices.sdk.MagnetInterstitialActivity"  
+				android:theme="@android:style/Theme.Translucent.NoTitleBar"
+				android:configChanges="orientation|screenSize|keyboardHidden"
+				android:hardwareAccelerated="true" />
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--optional-->
         </config-file>
         
-        <source-file src="src/android/libs/magnet-android-sdk-cordova-4.0.5.jar" target-dir="libs/"/>		
+        <source-file src="src/android/libs/magnet-android-sdk-cordova-5.0.5.jar" target-dir="libs/"/>
     </platform>
 
 </plugin>

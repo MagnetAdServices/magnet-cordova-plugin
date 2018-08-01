@@ -1,6 +1,6 @@
 {
   "name": "magnet-cordova-plugin",
-  "version": "1.0.0",
+  "version": "5.0.5",
   "description": "Magnet plugin is a cordova and phonegap advertising pluging to mometise your apps using html5 and js",
   "cordova": {
     "id": "magnet",

@@ -1,62 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
-    <meta name="msapplication-tap-highlight" content="no" />
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
     <title>Magnet cordova sample</title>
     <style>
-        .bodyStyle{
-            font-size: 32px;
+        .bodyStyle {
+            font-size: 24px;
         }
     </style>
+    <script src="../www/magnet.js"></script>
 </head>
-<body >
+<body>
 <div class="bodyStyle">
     <h2>Magnet cordova sample</h2>
     <lu>
-        <li><a href="javascript:loadInterstitial();">load Interstitial</a></li>
+        <li><a href="javascript:loadInterstitial();">Load Interstitial</a></li>
         <br/>
-        <li><a href="javascript:showInterstitial();">show Interstitial</a></li>
+        <li><a href="javascript:showInterstitial();">Show Interstitial</a></li>
         <br/>
-        <li><a href="javascript:showBannerTop();">show banner top</a></li>
+        <li><a href="javascript:showBannerTop();">Show Banner (Top)</a></li>
         <br/>
-        <li><a href="javascript:showBannerBottom();">show banner bottom</a></li>
+        <li><a href="javascript:showBannerBottom();">Show Banner (Bottom)</a></li>
         <br/>
-		<li><a href="javascript:removeBanner();">remove banner</a></li>
-		<br/>
+        <li><a href="javascript:removeBanner();">Remove Banner</a></li>
+        <br/>
+        <li><a href="javascript:stopBanner();">Stop Banner</a></li>
+        <br/>
+        <li><a href="javascript:loadRewarded();">Load Rewarded</a></li>
+        <br/>
+        <li><a href="javascript:showRewarded();">Show Rewarded</a></li>
+        <br/>
     </lu>
 
 </div>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
-	function onDeviceReady(){
-		magnet.MagnetInitialize(function(){alert('init success');}, function(){alert('init fail');});
-		magnet.MagnetSetTestMode(true, null, null);
-	}
-	function loadInterstitial(){
-		document.addEventListener(magnet.Event.onInterstitialAdReceived, onInterstitialReceived, false);
-		magnet.MagnetLoadInterstitial('Your adunit id', null, function(){alert('load fail');});
-	}
-	function showInterstitial(){
-		magnet.MagnetShowInterstitial(null, null);
-	}
-	function showBannerTop(){
-		magnet.MagnetShowBanner('Your adunit id',magnet.Position.TOP, null, function(){alert('banner fail');});
-	}
-	function showBannerBottom(){
-		magnet.MagnetShowBanner('Your adunit id',magnet.Position.BOTTOM, null, function(){alert('banner fail');});
-	}
-	function onInterstitialReceived(){
-		console.log("Interstitial received");
-		alert('Interstitial is ready');
-	}
-	function removeBanner(){
-		magnet.MagnetRemoveBanner(null, null);
-	}
-	document.addEventListener('deviceready',onDeviceReady, false);
+    function onDeviceReady() {
+        magnet.initialize(function () {
+            alert('init success');
+        }, function () {
+            alert('init fail');
+        });
+        magnet.setTestMode(true, null, null);
+    }
+
+    function loadInterstitial() {
+        document.addEventListener(magnet.Event.onInterstitialAdReceived, onInterstitialReceived, false);
+        magnet.loadInterstitial('YourAdUnitId', null, function (errorMsg) {
+            alert(errorMsg);
+        });
+    }
+
+    function showInterstitial() {
+        magnet.showInterstitial(null, null);
+    }
+
+    function showBannerTop() {
+        magnet.showBanner('YourAdUnitId', magnet.Position.TOP, function () {
+            alert('receive');
+        }, function (errorMsg) {
+            alert(errorMsg);
+        });
+    }
+
+    function showBannerBottom() {
+        document.addEventListener(magnet.Event.onBannerAdReceived, onBannerReceived, false);
+        document.addEventListener(magnet.Event.onBannerAdFailed, onBannerFailed, false);
+        magnet.showBanner('YourAdUnitId', magnet.Position.BOTTOM, null, null);
+    }
+
+    function loadRewarded() {
+        document.addEventListener(magnet.Event.onRewardedAdReceived, onRewardedReceived, false);
+        magnet.loadRewarded('YourAdUnitId', null, function (errorMsg) {
+            alert(errorMsg);
+        });
+    }
+
+    function showRewarded() {
+        document.addEventListener(magnet.Event.onRewardedAdFinish, onRewardedFinish, false);
+        magnet.showRewarded(null, null);
+    }
+
+    function onInterstitialReceived() {
+        console.log("Interstitial received");
+        alert('Interstitial is ready');
+    }
+
+    function onBannerReceived(event) {
+        alert(event.data);
+    }
+
+    function onBannerFailed(event) {
+        alert(event.data);
+    }
+
+    function removeBanner() {
+        magnet.removeBanner(null, null);
+    }
+
+    function stopBanner() {
+        document.removeEventListener(magnet.Event.onBannerAdReceived, onBannerReceived, false);
+        document.removeEventListener(magnet.Event.onBannerAdFailed, onBannerFailed, false);
+        magnet.stopBanner(null, null);
+    }
+
+    function onRewardedReceived() {
+        console.log("Rewarded received");
+        alert('Rewarded is ready');
+    }
+
+    function onRewardedFinish(event) {
+        alert('Reward? ' + event.data);
+        if (event.data === 'true') {
+            //successful reward
+        }
+    }
+
+    document.addEventListener('deviceready', onDeviceReady, false);
 </script>
 
 </body>
