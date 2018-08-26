@@ -35,11 +35,11 @@
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!--optional-->
 			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!--optional-->
         </config-file>
         
-        <source-file src="src/android/libs/magnet-android-sdk-cordova-5.0.5.jar" target-dir="libs/"/>
+        <source-file src="src/android/libs/magnet-android-sdk-cordova-5.0.6.jar" target-dir="libs/"/>
     </platform>
 
 </plugin>
